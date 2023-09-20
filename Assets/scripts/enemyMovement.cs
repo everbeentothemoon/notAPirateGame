@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -116,5 +116,69 @@ public class enemyMovement : MonoBehaviour
     {
         isMoving = false;
         isWaiting = true;
+    }
+}*/
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class enemyMovement : MonoBehaviour
+{
+    public float speed;
+    Transform player;
+
+    public int health;
+    public int damage;
+    //public EnemySpawner spawner;
+
+
+
+    //public EnemySpawner enemySpawner;
+
+    // Start is called before the first frame update
+    public int enemieskilled = 0;
+    void Start()
+    {
+        player = FindObjectOfType<angelScript>().transform;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Debug.Log("Player collided with: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletScript>().damage);
+            Debug.Log("hit");
+        }
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Bullet")
+        {
+            //TakeDamage(other.GetComponent<BulletScript>().damage);
+        }
+    }*/
+    public event System.Action OnEnemyDeath;
+    void TakeDamage(int damageValue)
+    {
+        health -= damageValue;
+        if (health <= 0)
+        {
+            enemieskilled++;
+            //Debug.Log(enemieskilled);
+            Destroy(gameObject);
+
+        }
+
     }
 }

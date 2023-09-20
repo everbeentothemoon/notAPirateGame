@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class grabAmmo : MonoBehaviour
 {
-    public GameObject Object;
+    /*public GameObject Object;
     public Gun g;
 
     private void Start()
@@ -17,5 +17,5 @@ public class grabAmmo : MonoBehaviour
             gameObject.SetActive(false);
             g.currentAmmo += 25;
         }
-    }
+    }*/
 }

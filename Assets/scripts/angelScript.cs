@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class angelScript : MonoBehaviour
 {
-    public float flySpeed = 5.0f; // Forward flying speed
+    /*public float flySpeed = 5.0f; // Forward flying speed
     public float ascentSpeed = 5000000.0f; // Speed for ascending
     public float descentSpeed = 5000000.0f; // Speed for descending
     public float rotationSpeed = 2.0f; // Rotation speed while flying
@@ -14,6 +16,16 @@ public class angelScript : MonoBehaviour
 
     private bool isFlying = false; // Flag to track flying mode
     private Rigidbody rb;
+
+    public int health;
+    public BarData healthBar;
+    private int healthValue = 100;
+
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] private GameObject key1;
+    [SerializeField] private GameObject key2;
+    [SerializeField] private GameObject key3;
+
 
     private void Start()
     {
@@ -54,12 +66,32 @@ public class angelScript : MonoBehaviour
 
             // Apply total movement
             rb.velocity = Vector3.ClampMagnitude(totalMovement, maxFlySpeed);
-
-            // Rotate the player based on horizontal input
-            float horizontalInput = Input.GetAxis("Horizontal");
-            Vector3 rotation = new Vector3(0, horizontalInput * rotationSpeed, 0);
-            transform.Rotate(rotation);
         }
 
+    }*/
+    public float flyForce = 1f;
+    public float flyReloadTime = 3f;
+
+    public Rigidbody rb;
+    private bool canFly = true;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && canFly)
+        {
+            Fly();
+            canFly = false;
+            StartCoroutine(ReloadFly());
+        }
+    }
+
+    private void Fly()
+    {
+        rb.AddForce(Vector3.up * flyForce, ForceMode.Impulse);
+    }
+
+    private IEnumerator ReloadFly()
+    {
+        yield return new WaitForSeconds(flyReloadTime);
+        canFly = true;
     }
 }

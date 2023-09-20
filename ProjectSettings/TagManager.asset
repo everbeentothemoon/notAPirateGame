@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ground
   - ammo
+  - Bullet
+  - Plants
+  - Water
+  - Poison
+  - Gem
+  - Enemy
   layers:
   - Default
   - TransparentFX
