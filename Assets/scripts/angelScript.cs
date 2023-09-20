@@ -12,9 +12,6 @@ public class angelScript : MonoBehaviour
     public float speedMultiplier = 1000.0f; // Speed multiplier
 
 
-    public bool cooldown = true;
-    public float timer = 15f;
-
     private bool isFlying = false; // Flag to track flying mode
     private Rigidbody rb;
 
@@ -29,7 +26,7 @@ public class angelScript : MonoBehaviour
     private void Update()
     {
         // Toggle flying mode when pressing the "X" key
-        if (Input.GetKeyDown(KeyCode.X) && cooldown)
+        if (Input.GetKeyDown(KeyCode.X))
         {
             isFlying = !isFlying;
 
@@ -42,7 +39,6 @@ public class angelScript : MonoBehaviour
         // If in flying mode, allow movement in the direction the camera is facing
         if (isFlying)
         {
-            timer -= Time.deltaTime;
             // Calculate the movement direction based on camera forward
             Vector3 moveDirection = Camera.main.transform.forward.normalized;
 
@@ -63,38 +59,7 @@ public class angelScript : MonoBehaviour
             float horizontalInput = Input.GetAxis("Horizontal");
             Vector3 rotation = new Vector3(0, horizontalInput * rotationSpeed, 0);
             transform.Rotate(rotation);
-
-
-
         }
 
-        if (timer <= 0)
-        {
-            float t = 15;
-            isFlying = false;
-
-
-            if (!isFlying)
-            {
-                if (t > 0)
-                {
-                    t -= Time.deltaTime;
-                }
-                if (t <= 0)
-                {
-                    TimerAdd();
-                }
-            }
-
-
-
-
-        }
-
-    }
-    private void TimerAdd()
-    {
-        isFlying = true;
-        timer = 15f;
     }
 }
