@@ -8,10 +8,15 @@ public class extras : MonoBehaviour
     public float time = 5f;
     public bool flashy;
     private bool flashlightOn = false;
+    public List<GameObject> gameObjects;
 
     void Start()
     {
         flashlight.SetActive(false);
+        foreach (GameObject go in gameObjects)
+        {
+            go.SetActive(false);
+        }
     }
 
     void Update()
@@ -22,4 +27,13 @@ public class extras : MonoBehaviour
             flashlight.SetActive(flashlightOn);
         }
     }
+
+    public void accept()
+    {
+        foreach (GameObject obj in gameObjects)
+        {
+            obj.SetActive(true);
+        }
+    }
+
 }
