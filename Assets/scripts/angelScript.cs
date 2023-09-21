@@ -66,6 +66,10 @@ public class angelScript : MonoBehaviour
 
             // Apply total movement
             rb.velocity = Vector3.ClampMagnitude(totalMovement, maxFlySpeed);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         }
 
     }*/
