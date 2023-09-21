@@ -19,22 +19,26 @@ public class npc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= activationDistance)
+        if (mission != null)
         {
-            mission.SetActive(true);
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+                if (distanceToPlayer <= activationDistance)
+                {
+                    mission.SetActive(true);
+                }
+
+                if (distanceToPlayer >= activationDistance)
+                {
+                    mission.SetActive(false);
+                }
+
+                Vector3 directionToPlayer = player.position - transform.position;
+
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, fixedUpDirection);
+
+                transform.rotation = targetRotation;
         }
-
-        if (distanceToPlayer >= activationDistance)
-        {
-            mission.SetActive(false);
-        }
-
-        Vector3 directionToPlayer = player.position - transform.position;
-
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, fixedUpDirection);
-
-        transform.rotation = targetRotation;
+        
     }
 }

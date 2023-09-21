@@ -9,7 +9,7 @@ public class extras : MonoBehaviour
     public bool flashy;
     private bool flashlightOn = false;
     public List<GameObject> gameObjects;
-    public npc n;
+    public GameObject mission;
 
     void Start()
     {
@@ -18,7 +18,6 @@ public class extras : MonoBehaviour
         {
             go.SetActive(false);
         }
-        n = GetComponent<npc>();
     }
 
     void Update()
@@ -37,7 +36,7 @@ public class extras : MonoBehaviour
             obj.SetActive(true);
 
         }
-        Destroy(n.mission);
+        Destroy(mission);
     }
 
 }
